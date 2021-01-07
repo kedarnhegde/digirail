@@ -21,6 +21,7 @@ class Contact extends React.Component {
         firstname:'',
         lastname:'',
         number:'',
+        desc:'',
         redirect:false,
         
     }
@@ -41,6 +42,11 @@ class Contact extends React.Component {
                 number:value
             })
         }
+        if(element === "desc"){
+            this.setState({
+                desc:value
+            })
+        }
 
     }
     handleclick(event){
@@ -51,7 +57,8 @@ class Contact extends React.Component {
             var data = {
                 firstname: this.state.firstname,
                 lastname: this.state.lastname,
-                number:this.state.number
+                number:this.state.number,
+                desc:this.state.desc
             }
             
             
@@ -127,7 +134,7 @@ class Contact extends React.Component {
             
             
         
-        <ReactBoostrap.Form.Control as="textarea" rows="4" placeholder="How can we help you?" />
+        <ReactBoostrap.Form.Control as="textarea" rows="4" placeholder="How can we help you?" onChange={(event) =>this.handlechange(event,"desc")} />
     </ReactBoostrap.Form.Group>
         </ReactBoostrap.Form>
         <ReactBoostrap.Form inline>

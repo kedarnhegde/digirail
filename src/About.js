@@ -29,10 +29,10 @@ class About extends React.Component {
                 <h2>Team Runtime Terror!</h2>
                 <br></br>
                 <p>We, Runtime Terror Team has worked on our first project. We're a team of 4 students studying Information Science and Engineering in Dayananda Sagar College of Engineering in Bangalore.</p>
-                <p>We have built this web-app, using ReactJS with CSS for front-end , api using nodejs and postgres SQL for the back-end. This is just a demo-project, and we've used Approximate values for all the distances. </p>
+                <p>We have built this web-app, using ReactJS with CSS for front-end , API using Node JS and Postgres SQL for the back-end. This is just a demo-project, and we've used Approximate values for all the distances. </p>
                 <h4>Web Developers:</h4>
                 <ul className="Names">
-                    <li>Rithik Dutt</li>
+                    <li>Akash Sangami</li>
                     <li>Kedar Hegde</li>
                     <li>Rahul B V</li>
                     <li>Sandesh S Hegde</li>
@@ -46,7 +46,7 @@ class About extends React.Component {
             <p>Dayananda Sagar College of Engineering is approved by All India Council for Technical Education (AICTE), Govt. of India and affiliated to Visvesvaraya Technological University. It has widest choice of engineering branches having 15 Under Graduate courses & 13 Post Graduate courses. In addition, it has 20 Research Centres in different branches of Engineering catering to research scholars for obtaining Ph.D under VTU. Various courses are accredited by NBA.</p>
 
     <p>The Institute is spread over 29 acres of land with large infrastructure supported by laboratories with state-of-the-art, Equipment & Machines. The Central Library with modern facilities and the Digital Library provides the knowledge base for the students.</p>
-        <p>The campus is WI-FI equipped with large bandwidth internet facility. The College has good faculty strength with highest professional integrity and committed to the academics with transparency in their actions.Each faculty takes the responsibility of mentoring a certain number of students’ through personal attention paving the way for the students’ professional growth. </p>
+        <p>The campus is Wi-Fi equipped with large bandwidth internet facility. The College has good faculty strength with highest professional integrity and committed to the academics with transparency in their actions.Each faculty takes the responsibility of mentoring a certain number of students’ through personal attention paving the way for the students’ professional growth. </p>
         </div>
         <Footer/>
         </div>
