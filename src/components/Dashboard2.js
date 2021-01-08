@@ -2,178 +2,182 @@ import React from 'react';
 import Dashboard_video from '../media/Dashboard_video.mp4';
 import log from '../media/logo.gif';
 import * as ReactBoostrap from 'react-bootstrap';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import load from "../media/loading.gif"
 import Footer from "./Footer";
 import FadeIn from 'react-fade-in';
 
 class Dashboard2 extends React.Component {
-    
+
     state = {
         source: '',
         destination: '',
-        date : '',
-        classs : '',
+        date: '',
+        classs: '',
         redirect: false,
-        loading:true,
-        redirect1:false,
-        data1:'',
-        isdatapresent:false,
-        results:[]
+        loading: true,
+        redirect1: false,
+        data1: '',
+        isdatapresent: false,
+        results: []
     }
-    handleChange(event , element) {
+    handleChange(event, element) {
         var value = event.currentTarget.value
-        if(element === "source") {
+        if (element === "source") {
             this.setState({
                 source: value
             })
         }
-        else if(element === "destination"){
+        else if (element === "destination") {
             this.setState({
                 destination: value
             })
         }
-        else if(element === "date") {
+        else if (element === "date") {
             this.setState({
-                date :value
+                date: value
             })
         }
-        else{   
+        else {
             this.setState({
-                classs:value
+                classs: value
             })
         }
 
     }
-    handleClick2(){
+    handleClick2() {
         console.log(this.state.source)
         console.log(this.state.destination)
-        
+
         this.setState({
             redirect: true
         })
-        
-        
-    }
-    handleClick = async() => {
-        var data = {
-            source: this.state.source,
-            destination: this.state.destination,
-            date: this.state.date,
-            classs:this.state.classs
-        }
-        const settings={
-            method: 'POST',
-            body:JSON.stringify(data),
-            headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        }
-        };
-        try {
-            const res = await fetch(`http://localhost:9000/dashboard`, settings);
-            if(res.status === 200){
-                this.setState({
-                    loading:false
-                })
-            }
-            const result = await res.json()
-            
-            console.log(result.length)
-            if(result.length === 0){
-                this.setState({
-                    redirect1:true
 
-                })
-                return result
+
+    }
+    handleClick = async () => {
+        if (this.state.source === '' || this.state.destination === '' || this.state.date === '' || this.state.classs === '') {
+            alert("Please Enter all fields of the form");
+        }
+        else {
+            var data = {
+                source: this.state.source,
+                destination: this.state.destination,
+                date: this.state.date,
+                classs: this.state.classs
             }
-            else{
+            const settings = {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            };
+            try {
+                const res = await fetch(`http://localhost:9000/dashboard`, settings);
+                if (res.status === 200) {
+                    this.setState({
+                        loading: false
+                    })
+                }
+                const result = await res.json()
+
+                console.log(result.length)
+                if (result.length === 0) {
+                    this.setState({
+                        redirect1: true
+
+                    })
+                    return result
+                }
+                else {
+                    this.setState({
+                        isdatapresent: true
+                    })
+                }
                 this.setState({
-                    isdatapresent:true
+                    data1: result
                 })
+                console.log(this.state.data1)
+                this.setState({
+                    results: result.map(train => {
+                        return (
+                            <div><ReactBoostrap.Card style={{ width: '35rem' }}>
+                                <FadeIn>
+                                    <ReactBoostrap.ListGroup variant="pills">
+                                        <ReactBoostrap.ListGroup.Item>{train.trainno}</ReactBoostrap.ListGroup.Item>
+                                        <ReactBoostrap.ListGroup.Item>{train.traintype}</ReactBoostrap.ListGroup.Item>
+                                        <ReactBoostrap.ListGroup.Item>{train.depttime}</ReactBoostrap.ListGroup.Item>
+                                        <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs === "ac" ? train.acpr : train.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
+                                    </ReactBoostrap.ListGroup>
+                                </FadeIn>
+                            </ReactBoostrap.Card></div>
+                        )
+                    })
+                })
+                return (this.state.results)
+            } catch (e) {
+                return e;
             }
-            this.setState({
-                data1:result
-            })
-            console.log(this.state.data1)
-            this.setState({
-                results:result.map(train =>{
-                    return(
-                        <div><ReactBoostrap.Card style={{ width: '35rem' }}>
-                            <FadeIn>
-  <ReactBoostrap.ListGroup variant="pills">
-    <ReactBoostrap.ListGroup.Item>{train.trainno}</ReactBoostrap.ListGroup.Item>
-    <ReactBoostrap.ListGroup.Item>{train.traintype}</ReactBoostrap.ListGroup.Item>
-    <ReactBoostrap.ListGroup.Item>{train.depttime}</ReactBoostrap.ListGroup.Item>
-    <ReactBoostrap.ListGroup.Item>{train.normalpr} (Normal)</ReactBoostrap.ListGroup.Item>
-    <ReactBoostrap.ListGroup.Item>{train.acpr} (AC)</ReactBoostrap.ListGroup.Item>
-  </ReactBoostrap.ListGroup>
-  </FadeIn>
-</ReactBoostrap.Card></div>
-                    )
-                })
-            })
-            return(this.state.results)
-        } catch (e) {
-            return e;
         }
     }
-    
+
 
     render() {
-        
-        
-        
-        return(
+
+
+
+        return (
             <div className='dashimage'>
-                {this.state.redirect===true? <Redirect to={{pathname: "/map", state: {src: this.state.source, dest: this.state.destination,redi:this.state.redirect}}}/>:console.log(this.state)}
-                {this.state.redirect1=== true? <Redirect to="/error2"/>:null}
+                {this.state.redirect === true ? <Redirect to={{ pathname: "/map", state: { src: this.state.source, dest: this.state.destination, redi: this.state.redirect } }} /> : console.log(this.state)}
+                {this.state.redirect1 === true ? <Redirect to="/error2" /> : null}
                 <video
                     autoPlay
                     muted
                     loop
                     style={{
-                        position:"fixed",
-                        width:"100%",
-                        left:"50%",
-                        top:"50%",
-                        bottom:"0",
-                        height:"100%",
-                        objectFit:"cover",
+                        position: "fixed",
+                        width: "100%",
+                        left: "50%",
+                        top: "50%",
+                        bottom: "0",
+                        height: "100%",
+                        objectFit: "cover",
                         transform: "translate(-50%,-50%)",
-                        zIndex:"-1"
+                        zIndex: "-1"
                     }}
-                    >
-                    <source src = {Dashboard_video} type = "video/mp4" />
+                >
+                    <source src={Dashboard_video} type="video/mp4" />
                 </video>
-                
+
                 <div className='contain'>
-                    <img src = {log} alt = 'writinglogo'/>
-                    <ReactBoostrap.Form inline className = "details" >
+                    <img src={log} alt='writinglogo' />
+                    <ReactBoostrap.Form inline className="details" >
                         <label>Source</label>
                         <ReactBoostrap.FormControl type="text" placeholder="Source e.x: Bangalore" className="source" id="inputdefault" onChange={(event) => this.handleChange(event, "source")} />
                         <label>Destination</label>
-                        <ReactBoostrap.FormControl type="text" placeholder="Destination e.x: Delhi" className="destination" id = "inputdefault" onChange={(event) => this.handleChange(event, "destination")}/>
+                        <ReactBoostrap.FormControl type="text" placeholder="Destination e.x: Delhi" className="destination" id="inputdefault" onChange={(event) => this.handleChange(event, "destination")} />
                         <label>Date of Journey</label>
                         <ReactBoostrap.FormControl type="date" placeholder="DD/MM/YYYY"
-                        className="dates" onChange={(event) => this.handleChange(event, "date")}/>
+                            className="dates" onChange={(event) => this.handleChange(event, "date")} />
                         <label className="classes">Classes</label>
                         <ReactBoostrap.FormControl type="text" placeholder="Normal/AC"
-                        className="trainclass" onChange={(event) => this.handleChange(event, "classs")}/>
-                        <ReactBoostrap.Button variant = "primary" className="trainbtn" onClick= {this.handleClick.bind(this)}>Find Trains</ReactBoostrap.Button>
-                        <ReactBoostrap.Button variant = "success" className="mapbtn" onClick={this.handleClick2.bind(this)}>Show Map</ReactBoostrap.Button>
+                            className="trainclass" onChange={(event) => this.handleChange(event, "classs")} />
+                        <ReactBoostrap.Button variant="primary" className="trainbtn" onClick={this.handleClick.bind(this)}>Find Trains</ReactBoostrap.Button>
+                        <ReactBoostrap.Button variant="success" className="mapbtn" onClick={this.handleClick2.bind(this)}>Show Map</ReactBoostrap.Button>
                     </ReactBoostrap.Form>
                 </div>
                 <div className="contain1">
-                    {this.state.loading === true?<img src = {load} alt ="loading.."/>:
-                    
+                    {this.state.loading === true ? <img src={load} alt="loading.." /> :
+
                         this.state.results}
-                    
-                    
-                    
-                    
+
+
+
+
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         );
     }

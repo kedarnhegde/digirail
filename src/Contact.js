@@ -51,7 +51,8 @@ class Contact extends React.Component {
     }
     handleclick(event){
         if( this.state.firstname === '' || this.state.lastname === '' || this.state.number === ''){
-            alert("Please Enter all fields")
+            alert("Please Enter all fields");
+            console.log('Hello');
         }
         else{
             var data = {
