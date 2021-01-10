@@ -23,11 +23,11 @@ class CPrice extends React.Component {
             data: false,
             load: "Your search results appear here"
         }
-        const token = localStorage.getItem("token")
-        let loggedIn = true
-        if (token === null) {
-            loggedIn = false
-        }
+        // const token = localStorage.getItem("token")
+        // let loggedIn = true
+        // if (token === null) {
+        //     loggedIn = false
+        // }
 
     }
 
@@ -57,7 +57,7 @@ class CPrice extends React.Component {
 
     handleClick() {
         if (this.state.source === '' || this.state.destination === '' || this.state.date === '' || this.state.classs === '') {
-            alert("Please Enter all fields of the form");
+            alert("Please Enter all the fields of the form");
 
         }
         else {
@@ -105,7 +105,7 @@ class CPrice extends React.Component {
                                         <ReactBoostrap.ListGroup.Item>{res.trainno}</ReactBoostrap.ListGroup.Item>
                                         <ReactBoostrap.ListGroup.Item>{res.traintype}</ReactBoostrap.ListGroup.Item>
                                         
-                                        <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs === "ac" ? res.acpr : res.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
+                                        <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs.toUpperCase() === "AC" ? res.acpr : res.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
                                         
                                     </ReactBoostrap.ListGroup>
                                 </FadeIn>

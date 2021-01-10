@@ -6,6 +6,8 @@ import { Redirect } from "react-router-dom";
 import load from "../media/loading.gif"
 import Footer from "./Footer";
 import FadeIn from 'react-fade-in';
+import DatePicker from 'react-datetime';
+import 'react-datetime/css/react-datetime.css'; 
 
 class Dashboard2 extends React.Component {
 
@@ -19,8 +21,14 @@ class Dashboard2 extends React.Component {
         redirect1: false,
         data1: '',
         isdatapresent: false,
-        results: []
+        results: [],
+        
     }
+    // yesterday = moment().subtract(1, 'day');
+    disablePastDt = current => {
+        return current.isAfter();
+      };
+   
     handleChange(event, element) {
         var value = event.currentTarget.value
         if (element === "source") {
@@ -46,18 +54,26 @@ class Dashboard2 extends React.Component {
 
     }
     handleClick2() {
+        if (this.state.source === '' || this.state.destination === '') {
+            alert("Please Enter all the fields of the form");
+        }
+        else {
         console.log(this.state.source)
         console.log(this.state.destination)
 
         this.setState({
             redirect: true
         })
+    }
 
 
     }
     handleClick = async () => {
-        if (this.state.source === '' || this.state.destination === '' || this.state.date === '' || this.state.classs === '') {
-            alert("Please Enter all fields of the form");
+        if (this.state.source === '' || this.state.destination === ''  || this.state.classs === '') {
+            alert("Please Enter all the fields of the form");
+        }
+        else if(this.state.source.toUpperCase() === this.state.destination.toUpperCase()) {
+                alert('You are already in ' + this.state.source.toUpperCase());
         }
         else {
             var data = {
@@ -109,7 +125,7 @@ class Dashboard2 extends React.Component {
                                         <ReactBoostrap.ListGroup.Item>{train.trainno}</ReactBoostrap.ListGroup.Item>
                                         <ReactBoostrap.ListGroup.Item>{train.traintype}</ReactBoostrap.ListGroup.Item>
                                         <ReactBoostrap.ListGroup.Item>{train.depttime}</ReactBoostrap.ListGroup.Item>
-                                        <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs === "ac" ? train.acpr : train.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
+                                        <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs.toUpperCase() === "AC" ? train.acpr : train.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
                                     </ReactBoostrap.ListGroup>
                                 </FadeIn>
                             </ReactBoostrap.Card></div>
@@ -132,6 +148,7 @@ class Dashboard2 extends React.Component {
             <div className='dashimage'>
                 {this.state.redirect === true ? <Redirect to={{ pathname: "/map", state: { src: this.state.source, dest: this.state.destination, redi: this.state.redirect } }} /> : console.log(this.state)}
                 {this.state.redirect1 === true ? <Redirect to="/error2" /> : null}
+                
                 <video
                     autoPlay
                     muted
@@ -159,8 +176,12 @@ class Dashboard2 extends React.Component {
                         <label>Destination</label>
                         <ReactBoostrap.FormControl type="text" placeholder="Destination e.x: Delhi" className="destination" id="inputdefault" onChange={(event) => this.handleChange(event, "destination")} />
                         <label>Date of Journey</label>
-                        <ReactBoostrap.FormControl type="date" placeholder="DD/MM/YYYY"
-                            className="dates" onChange={(event) => this.handleChange(event, "date")} />
+                        {/* <ReactBoostrap.FormControl type="date" placeholder="DD/MM/YYYY"
+                            className="dates" onChange={(event) => this.handleChange(event, "date")} /> */}
+                            <DatePicker
+    isValidDate={this.disablePastDt.bind(this)}
+  />
+    
                         <label className="classes">Classes</label>
                         <ReactBoostrap.FormControl type="text" placeholder="Normal/AC"
                             className="trainclass" onChange={(event) => this.handleChange(event, "classs")} />

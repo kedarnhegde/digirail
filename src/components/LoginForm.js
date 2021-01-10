@@ -38,8 +38,8 @@ class LoginForm extends React.Component {
     }
 
     handleClick(event) {
-        if( this.state.email === '' || this.state.password === '' ){
-            alert("Please Enter all fields");
+        if( this.state.email === undefined || this.state.password === undefined ){
+            alert("Please Enter all the fields");
         }
         else{
             var data = {

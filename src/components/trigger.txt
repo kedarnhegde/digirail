@@ -1,0 +1,19 @@
+CREATE OR REPLACE FUNCTION tax()
+  RETURNS trigger AS
+$$
+BEGIN
+         NEW.acpr = NEW.acpr * 1.1;
+	 NEW.normalpr = NEW.normalpr * 1.1;
+ 
+    RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+
+
+CREATE TRIGGER test_trigger
+  BEFORE INSERT
+  ON trainn
+  FOR EACH ROW
+  EXECUTE PROCEDURE tax();

@@ -50,9 +50,9 @@ class Contact extends React.Component {
 
     }
     handleclick(event){
-        if( this.state.firstname === '' || this.state.lastname === '' || this.state.number === ''){
-            alert("Please Enter all fields");
-            console.log('Hello');
+        if( this.state.firstname === undefined || this.state.lastname === undefined || this.state.number === undefined){
+            alert("Please Enter all the fields");
+            
         }
         else{
             var data = {
