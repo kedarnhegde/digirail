@@ -316,13 +316,13 @@ p{
 }
 .dashimage .contain1 {
   border-radius: 5px;
-  position: absolute;
+  position: relative;
   bottom:0;
   top:0;
   right:0;
   left:0;
   float: right;
-  margin-top:105px;
+  margin-top: 32px;
   margin-left:40%;
   margin-right:20px;
   margin-bottom: 100px;
@@ -332,6 +332,7 @@ p{
   width:55%;
   padding: 20px;
   line-height: 1.6em;
+  height: 100%;
 }
 .contain img {
   width:40%;
@@ -368,8 +369,9 @@ p{
 }
 .Resultsbaruthe{
     border-radius: 5px;
+    display: grid;
     position: absolute;
-    bottom:0;
+    
     top:0;
     right:0;
     left:0;
@@ -377,7 +379,7 @@ p{
     margin-top:105px;
     margin-left:40%;
     margin-right:20px;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     background:rgb(158, 166, 170);
     background: rgba(247, 246, 244, 0.5); /* Black background with 0.5 opacity */
     color:Black;
@@ -465,4 +467,14 @@ iframe {
 } 
 .Price_list {
   margin-bottom: 100px;
+}
+.yet_to_search {
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 30%;
+}
+.cp_cards {
+  border-radius: 15px;
 }

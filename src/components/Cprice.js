@@ -99,51 +99,51 @@ class CPrice extends React.Component {
                 //     <h2 className='check_pr'>Cost({this.state.classs}): <h4>{this.state.classs === "ac" ? res.acpr : res.normalpr} </h4></h2>
                 //     <hr className='check_line' />
                 // </div>
-                <div><ReactBoostrap.Card style={{ width: '35rem' }}>
-                                <FadeIn>
-                                    <ReactBoostrap.ListGroup variant="pills">
-                                        <ReactBoostrap.ListGroup.Item>{res.trainno}</ReactBoostrap.ListGroup.Item>
-                                        <ReactBoostrap.ListGroup.Item>{res.traintype}</ReactBoostrap.ListGroup.Item>
-                                        
-                                        <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs.toUpperCase() === "AC" ? res.acpr : res.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
-                                        
-                                    </ReactBoostrap.ListGroup>
-                                </FadeIn>
-                            </ReactBoostrap.Card></div>
+                <div className='mb-3 cp_cards'><ReactBoostrap.Card style={{ width: '90%' }}>
+                    <FadeIn>
+                        <ReactBoostrap.ListGroup variant="pills">
+                            <ReactBoostrap.ListGroup.Item>{res.trainno}</ReactBoostrap.ListGroup.Item>
+                            <ReactBoostrap.ListGroup.Item>{res.traintype}</ReactBoostrap.ListGroup.Item>
+
+                            <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs.toUpperCase() === "AC" ? res.acpr : res.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
+
+                        </ReactBoostrap.ListGroup>
+                    </FadeIn>
+                </ReactBoostrap.Card></div>
             );
         })
         return (
-<div className='Cprice_bg'>
-            <div className="image">
-                <NavBar2 />
-                <img src={BG} width="100%" height="650px" alt="logo" />
-                <div className="Price">
-                    <img src={Logo} className="giflogo" width="150px" height="100px" alt="logo" />
-                    <br></br>
-                    <br></br>
+            <div className='Cprice_bg'>
+                <div className="image">
+                    <NavBar2 />
+                    <img src={BG} width="100%" height="650px" alt="logo" />
+                    <div className="Price">
+                        <img src={Logo} className="giflogo" width="150px" height="100px" alt="logo" />
+                        <br></br>
+                        <br></br>
             Source
         <ReactBoostrap.Form inline>
-                        <ReactBoostrap.FormControl type="text" placeholder="Source" onChange={(event) => this.handleChange(event, "source")} />
-                    </ReactBoostrap.Form>
-                    <br></br>
+                            <ReactBoostrap.FormControl type="text" placeholder="Source" onChange={(event) => this.handleChange(event, "source")} />
+                        </ReactBoostrap.Form>
+                        <br></br>
       Destination
       <ReactBoostrap.Form inline>
-                        <ReactBoostrap.FormControl type="text" placeholder="Destination" onChange={(event) => this.handleChange(event, "destination")} />
-                    </ReactBoostrap.Form>
-                    <br></br>
+                            <ReactBoostrap.FormControl type="text" placeholder="Destination" onChange={(event) => this.handleChange(event, "destination")} />
+                        </ReactBoostrap.Form>
+                        <br></br>
       Class
       <ReactBoostrap.Form inline>
-                        <ReactBoostrap.FormControl type="text" placeholder="Normal/AC" onChange={(event) => this.handleChange(event, "classs")} />
-                    </ReactBoostrap.Form>
-                    <br></br>
+                            <ReactBoostrap.FormControl type="text" placeholder="Normal/AC" onChange={(event) => this.handleChange(event, "classs")} />
+                        </ReactBoostrap.Form>
+                        <br></br>
 
-                    <ReactBoostrap.Button variant="outline-primary" className="pricebtn" onClick={this.handleClick.bind(this)} >Check Price</ReactBoostrap.Button>
+                        <ReactBoostrap.Button variant="outline-primary" className="pricebtn" onClick={this.handleClick.bind(this)} >Check Price</ReactBoostrap.Button>
 
-                </div>
-                <div className="Resultsbaruthe">
-                    <p><i className='Price_list'>{this.state.data ? trains : this.state.load}</i></p>
+                    </div>
+                    <div className="Resultsbaruthe">
+                        <p><i className='Price_list'>{this.state.data ? trains : this.state.load}</i></p>
 
-                </div>
+                    </div>
 
 
 

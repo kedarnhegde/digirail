@@ -3,7 +3,6 @@ import Dashboard_video from '../media/Dashboard_video.mp4';
 import log from '../media/logo.gif';
 import * as ReactBoostrap from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
-import load from "../media/loading.gif"
 import Footer from "./Footer";
 import FadeIn from 'react-fade-in';
 import DatePicker from 'react-datetime';
@@ -190,7 +189,7 @@ class Dashboard2 extends React.Component {
                     </ReactBoostrap.Form>
                 </div>
                 <div className="contain1">
-                    {this.state.loading === true ? <img src={load} alt="loading.." /> :
+                    {this.state.loading === true ? <p className='yet_to_search'>Please fill the form to get Trains</p> :
 
                         this.state.results}
 

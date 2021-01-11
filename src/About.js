@@ -28,7 +28,7 @@ class About extends React.Component {
             <div className="Runtime">
                 <h2>Team Runtime Terror!</h2>
                 <br></br>
-                <p>We, Runtime Terror Team has worked on our first project. We're a team of 4 students studying Information Science and Engineering in Dayananda Sagar College of Engineering in Bangalore.</p>
+                <p>We, Runtime Terror Team has worked on a project. We're a team of 4 students studying Information Science and Engineering in Dayananda Sagar College of Engineering in Bangalore.</p>
                 <p>We have built this web-app, using ReactJS with CSS for front-end , API using Node JS and Postgres SQL for the back-end. This is just a demo-project, and we've used Approximate values for all the distances. </p>
                 <h4>Web Developers:</h4>
                 <ul className="Names">
