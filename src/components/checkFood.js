@@ -1,5 +1,5 @@
 import React from "react";
-import BG from "../media/BG.jpg";
+import BG from "../media/food.jpg";
 import * as ReactBoostrap from "react-bootstrap";
 import Logo from "../media/Pricelogo.gif";
 import NavBar2 from "./NavBar2";
@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import { Redirect } from "react-router-dom";
 import Axios from 'axios';
 import FadeIn from 'react-fade-in';
+import { FaTruckMonster } from "react-icons/fa";
 
 
 class CPrice extends React.Component {
@@ -15,14 +16,16 @@ class CPrice extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            source: '',
-            destination: '',
-            classs: '',
+            trainno: '',
+            
             results: [],
             loggedIn: true,
             data: false,
             load: "Your search results appear here",
-            error: false
+            sorry: "Sorry, we have no food for this train",
+            redirect2: false,
+            nofood: false,
+            invalid: false
         }
         // const token = localStorage.getItem("token")
         // let loggedIn = true
@@ -34,21 +37,12 @@ class CPrice extends React.Component {
 
     handleChange(event, element) {
         var value = event.currentTarget.value
-        if (element === "source") {
+        if (element === "trainno") {
             this.setState({
-                source: value
+                trainno: value
             })
         }
-        else if (element === "destination") {
-            this.setState({
-                destination: value
-            })
-        }
-        else if (element === "classs") {
-            this.setState({
-                classs: value
-            })
-        }
+        
         
 
     }
@@ -57,7 +51,7 @@ class CPrice extends React.Component {
 
 
     handleClick() {
-        if (this.state.source === '' || this.state.destination === '' || this.state.date === '' || this.state.classs === '') {
+        if (this.state.trainno === '') {
             alert("Please Enter all the fields of the form");
 
         }
@@ -66,12 +60,17 @@ class CPrice extends React.Component {
 
 
             var data = {
-                source: this.state.source,
-                destination: this.state.destination,
-                date: this.state.date,
-                classs: this.state.classs
+                trainno: this.state.trainno,
+                // destination: this.state.destination,
+                // date: this.state.date,
+                // classs: this.state.classs
             }
-            Axios.post('http://localhost:9000/dashboard', data, {
+            console.log(data);
+            console.log(this.state);
+            // Axios.post('http://localhost:9000/food', data, {
+
+            // })
+            Axios.post('http://localhost:9000/food', data, {
 
                 headers: {
                     'Content-Type': 'application/json'
@@ -82,21 +81,32 @@ class CPrice extends React.Component {
                     results: res.data,
                     data: true
                 })
-
-                if(this.state.results[0] === undefined) {
+                if (this.state.results[0] === undefined){
                     this.setState({
-                        error: true
-                    })
+                        invalid: true
+                    })  
                 }
                 else {
                     this.setState({
-                        error: false
-                    })
+                        invalid: false
+                    })  
                 }
+                if(this.state.results[0]['tfood'] === 'NO') {
+                    this.setState({
+                        nofood: true
+                    })    
+                }
+                else {
+                    this.setState({
+                        nofood: false
+                    })  
+                }
+               
             }).catch((error) => {
                 console.log(error);
             })
-        }
+            
+         }
     }
 
     render() {
@@ -114,10 +124,8 @@ class CPrice extends React.Component {
                 <div className='mb-3 cp_cards'><ReactBoostrap.Card style={{ width: '90%' }}>
                     <FadeIn>
                         <ReactBoostrap.ListGroup variant="pills">
-                            <ReactBoostrap.ListGroup.Item>{res.trainno}</ReactBoostrap.ListGroup.Item>
-                            <ReactBoostrap.ListGroup.Item>{res.traintype}</ReactBoostrap.ListGroup.Item>
+                            <ReactBoostrap.ListGroup.Item>{res.foodtype}</ReactBoostrap.ListGroup.Item>
 
-                            <ReactBoostrap.ListGroup.Item><h4 className='check_pr'>Cost({this.state.classs}): <h5>{this.state.classs.toUpperCase() === "AC" ? res.acpr : res.normalpr} </h5></h4></ReactBoostrap.ListGroup.Item>
 
                         </ReactBoostrap.ListGroup>
                     </FadeIn>
@@ -133,30 +141,25 @@ class CPrice extends React.Component {
                         <img src={Logo} className="giflogo" width="150px" height="100px" alt="logo" />
                         <br></br>
                         <br></br>
-            Source
+            Train Number
         <ReactBoostrap.Form inline>
-                            <ReactBoostrap.FormControl type="text" placeholder="Source" onChange={(event) => this.handleChange(event, "source")} />
+                            <ReactBoostrap.FormControl type="number" placeholder="Train number" onChange={(event) => this.handleChange(event, "trainno")} />
                         </ReactBoostrap.Form>
                         <br></br>
-      Destination
-      <ReactBoostrap.Form inline>
-                            <ReactBoostrap.FormControl type="text" placeholder="Destination" onChange={(event) => this.handleChange(event, "destination")} />
-                        </ReactBoostrap.Form>
-                        <br></br>
-      Class
-      <ReactBoostrap.Form inline>
-                            <ReactBoostrap.FormControl type="text" placeholder="Normal/AC" onChange={(event) => this.handleChange(event, "classs")} />
-                        </ReactBoostrap.Form>
+      
+      
                         <br></br>
 
-                        <ReactBoostrap.Button variant="outline-primary" className="pricebtn" onClick={this.handleClick.bind(this)} >Check Price</ReactBoostrap.Button>
+                        <ReactBoostrap.Button variant="outline-primary" className="pricebtn" onClick={this.handleClick.bind(this)} >Check Menu</ReactBoostrap.Button>
 
                     </div>
                     <div className="Resultsbaruthe">
                         <p><i className='Price_list'>
-                            {this.state.data ? trains : this.state.load}
-                            {this.state.error ? <Redirect to='/error2' /> : null }
-                            </i></p>
+                            {this.state.data ? this.state.nofood ? this.state.sorry : trains : this.state.load}
+                            {this.state.invalid ? <Redirect to='/error2'/> : null}
+                        
+                        </i>
+                        </p>
 
                     </div>
 

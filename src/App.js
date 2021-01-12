@@ -18,6 +18,7 @@ import Sketch from "./components/Sketch";
 import logo from "./components/Logout";
 import distance from "./components/Distance";
 import Error2 from "./components/Error2.js";
+import Food from "./components/checkFood.js";
 class App extends React.Component {
   
   
@@ -41,6 +42,7 @@ class App extends React.Component {
           <Route exact path = "/calculate" component = {distance}/>
           <Route exact path ="/algo" component = {algo}/>
           <Route exact path="/error2" component = {Error2}/>
+          <Route exact path="/food" component= {Food} />
         </div>
       );
   }

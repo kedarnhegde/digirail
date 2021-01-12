@@ -37,7 +37,7 @@ class NavBar2 extends React.Component {
         <ReactBoostrap.Nav className="mr-auto">
           <ReactBoostrap.Nav.Link href="/dashboard">Home</ReactBoostrap.Nav.Link>
           <ReactBoostrap.Nav.Link href="/check">Check Price</ReactBoostrap.Nav.Link>
-          {/* <ReactBoostrap.Nav.Link href="/algo">Algorithm</ReactBoostrap.Nav.Link> */}
+          <ReactBoostrap.Nav.Link href="/food">Food Menu</ReactBoostrap.Nav.Link>
           <ReactBoostrap.Nav.Link href="/logout">Logout</ReactBoostrap.Nav.Link>
           
           
